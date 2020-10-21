@@ -19,41 +19,43 @@ else
 				username=$(cut -f 1 -d "@" <<<"$line")
 				domain=$(cut -f 2 -d "@" <<<"$line")
 
-				pswd=$(openssl rand -base64 13)
-				echo "Username: $username  | domain name: $domain | password: $pswd"
+				# checking that a user exists
+				if id -u $username &>/dev/null; then
+				    echo 'user found'
+				else # creating user
+					pswd=$(openssl rand -base64 13)
+					echo "Username: $username  | domain name: $domain | password: $pswd"
 
-				useradd $username
-				echo $username:${pswd} | chpasswd
-				sudo mkhomedir_helper $username
-				if [ ! -d "/home/${username}/" ]; then
-					echo "Home directory was not created at /home/${username}/"
-					exit 1;
+					# create a user and use the generated password as their's
+					useradd $username
+					echo $username:${pswd} | chpasswd
+
+					#create a home directory and check that it was made
+					sudo mkhomedir_helper $username
+					if [ ! -d "/home/${username}/" ]; then
+						echo "Home directory was not created at /home/${username}/"
+						exit 1;
+					fi
+					
+					#ensure bash is the default shell
+					sudo usermod --shell /bin/bash $username
+
+
+					/bin/id -g "CSI230" 1>/dev/null 2>/dev/null
+					if [ ! $? -eq 0 ]; then # if the group CSI230 is not found
+						sudo groupadd -f CSI230
+					fi
+
+					sudo usermod -a -G CSI230 $username
 				fi
 				
-#				echo $(cut -f 7 -d ":" <<<$(cat /etc/passwd | grep $username))
-				sudo usermod --shell /bin/bash $username
-
+				# forcing a password change
 				sudo chage --lastday 0 $username
 
+				
 
-#				passwd –-stdin "$pswd"
-
-#				out=$(host -W1 -t A $line)
-#				if [ $? -eq 0 ];then
-#					ip=$(echo $out | cut -d " " -f 4)
-#					email=$(cut -f 1 -d "@" $(line))
-#					echo ${email}
-#					echo ${line}
-#					all_invalid=false
-#				else
-#					echo "${line},not found"
-#				fi
 			done
 			
-#			if $all_valid; then
-#				echo "None of the hosts were valid"
-#				exit 1
-#			fi
 		else
 			echo "Something was passed, but it was not an email list"
 			exit 1
