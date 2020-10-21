@@ -5,9 +5,6 @@
 # author brandon.boras
 # date 10/20/2020
 
-# *1 - https://stackoverflow.com/questions/47406014/how-to-cut-an-existing-variable-and-assign-to-a-new-variable-in-bash   needed this to figure out <<<
-# *2 - https://www.howtogeek.com/howto/30184/10-ways-to-generate-a-random-password-from-the-command-line/
-
 		# main program begins here
 
 if [ "$EUID" -ne 0 ]; then
@@ -19,16 +16,24 @@ else
 			all_invalid=true
 			cat ${1} | while read line
 			do
-				# *1
 				username=$(cut -f 1 -d "@" <<<"$line")
 				domain=$(cut -f 2 -d "@" <<<"$line")
 
-				# *2
-				pswd=$(openssl rand -base64 15)
+				pswd=$(openssl rand -base64 13)
 				echo "Username: $username  | domain name: $domain | password: $pswd"
 
 				useradd $username
 				echo $username:${pswd} | chpasswd
+				sudo mkhomedir_helper $username
+				if [ ! -d "/home/${username}/" ]; then
+					echo "Home directory was not created at /home/${username}/"
+					exit 1;
+				fi
+				
+#				echo $(cut -f 7 -d ":" <<<$(cat /etc/passwd | grep $username))
+				sudo usermod --shell /bin/bash $username
+
+				sudo chage --lastday 0 $username
 
 
 #				passwd –-stdin "$pswd"
@@ -59,4 +64,5 @@ else
 	fi
 fi
 exit 0
+
 
