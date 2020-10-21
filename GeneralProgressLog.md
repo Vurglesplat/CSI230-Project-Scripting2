@@ -22,6 +22,7 @@ show a screenshot of one of the received e-mails (an account under your control)
   - [ ] do a repeat run using a single account already created
   - [ ] this should result in a simple password change
   - [ ] repeat the login process for that account.
+  
  - [ ] extract a username by grabbing the text to the left of the @ delimiter
  - [ ] create a random password (openssl is great for this) of at least 12 characters
  - [ ] create a user account using the username, password, ensure that it has a home directory and that the default shell is bash.  Also make sure the user needs to change their password on first login (see the chage command).
@@ -48,8 +49,19 @@ Used [a Stack Overflow page](https://stackoverflow.com/questions/47406014/how-to
  - [x] Check for root user, if not root, Issue a warning and exit
  - [x] extract a username by grabbing the text to the left of the @ delimiter
 
+### 00:10 21 Oct 2020
+Generated and stored random password with openssl courtesy of a little help from [a How-To Geek page](https://www.howtogeek.com/howto/30184/10-ways-to-generate-a-random-password-from-the-command-line/)
 
+ - [x] create a random password (openssl is great for this) of at least 12 characters
 
+### 01:19 21 Oct 2020
+Implemented the pasword change, utlized [this Stack Exchange page](https://unix.stackexchange.com/questions/419063/how-to-create-user-and-password-in-one-script-for-100-users) to for help handling changing a password via script.
+Implemented a check for the home directory being created.
+Implemented forcing user to change account password on login.
+Implemented changing the user's default shell to bash.
+This was a really long single checkmark, looks like the lion's share is done so far, I'll probably head off for now and finish tomorrow morning.
+
+ - [x] create a user account using the username, password, ensure that it has a home directory and that the default shell is bash.  Also make sure the user needs to change their password on first login (see the chage command).
 
 
 #### Things to do checklist (updated over time)
@@ -62,8 +74,8 @@ show a screenshot of one of the received e-mails (an account under your control)
   - [ ] do a repeat run using a single account already created
   - [ ] this should result in a simple password change
   - [ ] repeat the login process for that account.
- - [ ] create a random password (openssl is great for this) of at least 12 characters
- - [ ] create a user account using the username, password, ensure that it has a home directory and that the default shell is bash.  Also make sure the user needs to change their password on first login (see the chage command).
+  
+
  - [ ] Add each user to the CSI230 group (you will need to create this if it doesn't exist)
  - [ ] if the user already exists, update their password
  - [ ] send the user an e-mail with their initial username/password (google the following terms "send a gmail from bash 2fa")
