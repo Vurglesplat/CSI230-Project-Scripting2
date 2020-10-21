@@ -59,7 +59,7 @@ Implemented the pasword change, utlized [this Stack Exchange page](https://unix.
 Implemented a check for the home directory being created.
 Implemented forcing user to change account password on login.
 Implemented changing the user's default shell to bash.
-This was a really long single checkmark, looks like the lion's share is done so far, I'll probably head off for now and finish tomorrow morning.
+This was a really long single checkmark, looks like the lion's share is done so far, I'll probably head off for now and finish later this morning.
 
  - [x] create a user account using the username, password, ensure that it has a home directory and that the default shell is bash.  Also make sure the user needs to change their password on first login (see the chage command).
 
