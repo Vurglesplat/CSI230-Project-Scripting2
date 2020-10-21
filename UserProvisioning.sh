@@ -6,7 +6,7 @@
 # date 10/20/2020
 
 # *1 - https://stackoverflow.com/questions/47406014/how-to-cut-an-existing-variable-and-assign-to-a-new-variable-in-bash   needed this to figure out <<<
-
+# *2 - https://www.howtogeek.com/howto/30184/10-ways-to-generate-a-random-password-from-the-command-line/
 
 		# main program begins here
 
@@ -22,8 +22,17 @@ else
 				# *1
 				username=$(cut -f 1 -d "@" <<<"$line")
 				domain=$(cut -f 2 -d "@" <<<"$line")
-				echo "Username: $username  ||| domain name: $domain"
-#				out=$line
+
+				# *2
+				pswd=$(openssl rand -base64 15)
+				echo "Username: $username  | domain name: $domain | password: $pswd"
+
+				useradd $username
+				echo $username:${pswd} | chpasswd
+
+
+#				passwd –-stdin "$pswd"
+
 #				out=$(host -W1 -t A $line)
 #				if [ $? -eq 0 ];then
 #					ip=$(echo $out | cut -d " " -f 4)
