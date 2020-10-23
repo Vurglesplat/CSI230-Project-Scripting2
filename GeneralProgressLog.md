@@ -78,22 +78,29 @@ Unsure if "updating their password" means setting a new random password for the 
 Beginning implementing email, here we go.
 Relying a lot on the extra info sent in announcements as well as [this page](https://linuxhint.com/bash_script_send_email/), ended up mostly going with the latter.
 Took a lot less time than I expected, so I may possibly be doing it wrong without knowing, but oh well. Seems to actually be functioning, so I'll take a break then come back to finish up the whole project.
+ 
+### 09:06pm 22 Oct 2020
+Definitely did email wrong after re-examining the instructions, oh well, I'll try to just finish out the rest of the requirements then swing back around to fix that if I can.
+
+ - [x] send the user an e-mail with their initial username/password (google the following terms "send a gmail from bash 2fa")
 
 
-#### Things to do checklist (updated over time)
-- [ ] A googledoc link to your demonstration video where you demonstrate.
-  - [ ] show the absence of accounts before the run
-  - [ ] An e-mail script run using at least 3 student e-mails, including your instructor's email address .  Add this last so as not to irritate your instructor with spam during testing.
+### 09:53 22 Oct 2020
+This should be the last update, going to just go through the documentation and then 
+
+- [x] A googledoc link to your demonstration video where you demonstrate.
+  - [x] show the absence of accounts before the run
+  - [x] An e-mail script run using at least 3 student e-mails, including your instructor's email address .  Add this last so as not to irritate your instructor with spam during testing.
 show a screenshot of one of the received e-mails (an account under your control)
-  - [ ] test your login via ssh using the new credentials
-  - [ ] you should be directed to change your password
-  - [ ] do a repeat run using a single account already created
-  - [ ] this should result in a simple password change
-  - [ ] repeat the login process for that account.
-  
+  - [x] test your login via ssh using the new credentials
+  - [x] you should be directed to change your password
+  - [x] do a repeat run using a single account already created
+  - [x] this should result in a simple password change
+  - [x] repeat the login process for that account.
 
 
- - [ ] send the user an e-mail with their initial username/password (google the following terms "send a gmail from bash 2fa")
- - [ ] This should run in one execution
+#### Final Checklist
+
+ - [x] This should run in one execution
  - [ ] There are multiple guides on sending emails to google via bash, see if you can avoid having your own email password stored and enter it interactively at run time.  Your password should be hidden on entry
- - [ ] You will also want to create the ability to remove the users you just added to facilitate testing, though this is not graded.
+ - [x] You will also want to create the ability to remove the users you just added to facilitate testing, though this is not graded.
