@@ -18,14 +18,17 @@ else
 			do
 				username=$(cut -f 1 -d "@" <<<"$line")
 				domain=$(cut -f 2 -d "@" <<<"$line")
+				pswd=$(openssl rand -base64 13)
+				emailMessage="null"
 
+	
 				# checking that a user exists
 				if id -u $username &>/dev/null; then
-				    echo 'user found'
-				else # creating user
-					pswd=$(openssl rand -base64 13)
-					echo "Username: $username  | domain name: $domain | password: $pswd"
+					emailMessage="Hello,
 
+					This account already exists, your password has been reassigned to: $pswd"
+
+				else # creating user
 					# create a user and use the generated password as their's
 					useradd $username
 					echo $username:${pswd} | chpasswd
@@ -46,13 +49,24 @@ else
 						sudo groupadd -f CSI230
 					fi
 
+
 					sudo usermod -a -G CSI230 $username
+
+					emailMessage="Hello,
+
+					An account has been made for this email address, you will need to change your password when you log in.
+
+					Username: $username
+					Password: $pswd
+
+					Thank you for your time,
+					Brandon Boras"
 				fi
 				
+
+				sendmail $line <<< ${emailMessage}
 				# forcing a password change
 				sudo chage --lastday 0 $username
-
-				
 
 			done
 			
